@@ -1,5 +1,5 @@
 # Using Bugs in Student Code to Predict Need for Help
-## Supplemental materials
+### Supplemental materials
 
 - bug classification examples
 - Features in current state
