@@ -2,7 +2,8 @@
 ### Supplemental materials
 
 - bug classification examples
-  - The examples in figure 1 are representative examples of puzzles given to students, though in some cases abbreviated. 
+  - The examples in figure 1 are representative examples of puzzles given to students, though in some cases abbreviated.
+- 20 bug types table
 - Features in current state
 - temporal pattern specifics and examples
   - We further distinguished between intervals of time when \textbf{one} instance of a bug type was present and intervals where \textbf{multiple} bugs of that same type was present.  
