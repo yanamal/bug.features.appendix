@@ -1,14 +1,30 @@
 # Supplemental materials
 
+## Bug type dimensions by example
+
+### Dimension 1: Type of buggy node
 ![](nodetypes.svg)
 
+### Dimension 2: Error type
 ![](errors.svg)
 
-![](parentting.svg)
+### Dimension 3: Parenting error subtype
+![](parenting.svg)
 
-- bug classification examples
-  - The examples in figure 1 are representative examples of puzzles given to students, though in some cases abbreviated.
-- 20 bug types table
+
+## Possible bug types
+
+Not all combinations of dimensions are possible. Specifically, a **Plan Structure** error never has a parenting error subtype, since there is no parenting error; and conversely, an **Interaction** error always has a parenting error subtype, since there is necessarily some kind of parenting problem present.
+
+The table below summarizes which combinations of **Error type** and **Parenting error subtype** are possible. This applies to errors on both **Action** and **Costruct** nodes, making a total of 20 possible combinations.
+
+|  | Shallow | Deep | Permutation | Other | None |
+|--|:-------:|:----:|:-----------:|:-----:|:----:|
+| **Plan Structure** | | | | | :heavy_check_mark: |
+| **Control Flow** | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | | |
+| **Interaction** | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | |
+
+## TODO
 - Features in current state
 - temporal pattern specifics and examples
   - We further distinguished between intervals of time when \textbf{one} instance of a bug type was present and intervals where \textbf{multiple} bugs of that same type was present.  
