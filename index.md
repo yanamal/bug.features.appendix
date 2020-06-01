@@ -1,5 +1,10 @@
-# Using Bugs in Student Code to Predict Need for Help
-### Supplemental materials
+# Supplemental materials
+
+![](nodetypes.svg)
+
+![](errors.svg)
+
+![](parentting.svg)
 
 - bug classification examples
   - The examples in figure 1 are representative examples of puzzles given to students, though in some cases abbreviated.
