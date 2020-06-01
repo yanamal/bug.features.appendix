@@ -20,9 +20,9 @@ The table below summarizes which combinations of **Error type** and **Parenting 
 
 |  | Shallow | Deep | Permutation | Other | None |
 |--|:-------:|:----:|:-----------:|:-----:|:----:|
-| **Plan Structure** | | | | | :heavy_check_mark: |
-| **Control Flow** | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | | |
-| **Interaction** | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | |
+| **Plan Structure** | | | | | :white_check_mark: |
+| **Control Flow** | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| **Interaction** | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | |
 
 ## TODO
 - Features in current state
