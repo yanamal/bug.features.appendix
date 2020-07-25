@@ -52,7 +52,7 @@ multivariate time-series data are represented as a set of time intervals: each i
 These time interval data are mined for common patterns in temporal relationships between intervals. Two intervals may **overlap** in time, **meet** (one starts exactly when the other ends), or be completely disjoint, with the first interval occurring **before** the other one.
 
 #### Example temporal patterns
-We found 92 temporal patterns which were common in student code, and used each as a boolean feature in the difficulty models (was this pattern ever present in this student's attempt so far?).
+We found 92 temporal patterns which were common in student code, and used each as a boolean feature in the difficulty models ("was this pattern ever present in this student's attempt so far?").
 
 Below are some represenative examples of the common temporal patterns we found.
 
@@ -88,12 +88,14 @@ The temporal pattern features tend to have more importance than the current and 
 The aggregate feature importance of the temporal pattern features is 0.74 for the TTF model, and 0.67 for the AC model. This means that temporal pattern features account for over half of the information gain for both models. By contrast, the aggregate importance of bug types present in the current state is 0.068 for the TTF model, and 0.105 for the AC model. As the table below shows, the average per-feature importance is also higher for temporal pattern features than current or previous state features.
 
 #### Average Feature Importances for Different Bug-derived Categories of Features
+
 |  | Tests To Fix | Abandonment Chance |
 |--|:-------:|:----:|
 | Temporal Patterns | **0.0080** | **0.0072** |
 | Current State | 0.0034 | 0.0053 |
 | Previous State | 0.0018 | 0.0037 |
  
+
 Many hint generation systems model the student state as a memoryless Markov Decision Process, where the next step 
 depend only on the current state of the code, not how the student got there.
 Yet the importance of temporal features
@@ -102,10 +104,49 @@ implies that the way a student has arrived at their current partial solution doe
 
 The importance of temporal features is also notable because it summarizes exactly the kind of information that would be very hard for a teacher with more than one student to keep track of on their own. While it is feasible for a good teacher in a small classroom to maintain a mental estimate of where each student is at the current moment in time, it would be nearly impossible for one teacher to track, in real time, each student's entire problem-solving process while multiple students solve potentially different problems. So, if having information about a student's process so far is indeed important for providing help effectively, a tool which summarizes this information and makes recommendations based on it could be very helpful for improving teacher effectiveness.
 
+### Important Bug Types
+
+There are two specific bug types that re-occur in many of the most important features: *[Construct, Interaction, Shallow]* and *[Action, Interaction, Deep]*. Five of the outlier features which involve these two bug types are labeled on the Feature Importance graph as follows:
+
+- **(a)** Temporal pattern *[Action, Interaction, Deep] before [Action, Interaction, Deep]* 
+  
+  (the student made the *[Action, Interaction, Deep]* error at least twice while solving this puzzle)
+- **(b)** Temporal pattern *[Construct, Interaction, Shallow]*
+
+  (the student  has  made  the *[Construct, Interaction, Shallow]*  error  at  least  once while solving this puzzle)
+- **(c)** Temporal pattern *[Action, Interaction, Deep]*
+- **(d)** Current code contains bug of type *[Construct, Interaction, Shallow]*
+- **(e)** Previous code contains bug of type *[Construct, Interaction, Shallow]*
+ 
+The bug type *[Construct, Interaction, Shallow]*
+indicates that the student has failed to nest some control flow construct inside another construct, instead placing it too shallowly.
+*[Action, Interaction, Deep]* is also a nesting error, but in the opposite direction: the student has nested some action unnecessarily deeply.
+
+The image below shows an example of student code containing both of these bug types:
+
+- The **Action** line `this.alien.turnToFace(this.alienRobot)` is nested too **deeply**, since it is supposed to appear at the top level of the program.
+- The **Construct** line `count 3 {` is instead nested too **shallowly**, since it is supposed to be inside the `do together {` block.
+- Both of these are **Interaction** errors, since they are both out of order with respect to the line `this.alien.say(Yay, you're home!)`
+
+![](bug_example.png)
+
+
+These two bug types occur in several other relatively important features, in addition to the five specific features highlighted above. *[Construct, Interaction, Shallow]* appears in 5 total features (3 temporal patterns, current state for this bug, and previous state for this bug). *[Action, Interaction, Deep]* occurs in 10 total features (8 temporal patterns and the current and previous states). The table below summarizes the cumulative feature importances for all features which involve one of these two bug types. 
+
+#### Cumulative Importances of Select Groups of Features
+
+|  | Tests To Fix | Abandonment Chance |
+|--|:-------:|:----:|
+| Features involving [Construct, Interaction, Shallow] | 0.065 | 0.087 |
+| Featuress involving [Action, Interaction, Deep] | 0.16 | 0.083 |
+| All "current code state" features | 0.068 | 0.105 |
+| All temporal features | 0.74 | 0.67 |
+
+In particular, for the TTF model, the features which represent the current code state have a much smaller cumulative feature importance than all features involving *[Action, Interaction, Deep]*. 
+So information about the entire history of this bug is more important than information about all the bugs in the current state of the code. One interpretation for the high relative importance of this particular bug for this particular metric is that it tends to require a lot more trial-and-error to fix than other bugs, yet isn't necessarily as deeply confusing as bugs like *[Construct, Interaction, Shallow]*, and thus doesn't contribute as much to a student's desire to abandon the puzzle: since this bug is on an Action node, by testing their code, the students can see which action is wrong, but can't always guess what to do about it without trying out several approaches by testing variations of their code.
+
 <!--
 ## TODO
 
 - Discussion/feature importance
-- examples of important bug types
-  - js examples of scrubbing through the temporal patterns?..
 -->
