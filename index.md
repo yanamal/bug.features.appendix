@@ -1,6 +1,22 @@
 # Supplemental materials
 
-***
+## Table of Contents
+  * [Bug type dimensions by example](#bug-type-dimensions-by-example)
+    + [Dimension 1: Type of buggy node](#dimension-1--type-of-buggy-node)
+    + [Dimension 2: Error type](#dimension-2--error-type)
+    + [Dimension 3: Parenting error subtype](#dimension-3--parenting-error-subtype)
+  * [Possible bug types](#possible-bug-types)
+  * [Features for predictive models](#features-for-predictive-models)
+    + [Current state features](#current-state-features)
+    + [Temporal patterns](#temporal-patterns)
+      - [Example temporal patterns](#example-temporal-patterns)
+        * [Example 1: meets](#example-1--meets)
+        * [Example 2: overlaps](#example-2--overlaps)
+        * [Example 3: complex repetition of a bug](#example-3--complex-repetition-of-a-bug)
+  * [Feature Importances](#feature-importances)
+      - [Average Feature Importances for Different Bug-derived Categories of Features](#average-feature-importances-for-different-bug-derived-categories-of-features)
+    + [Important Bug Types](#important-bug-types)
+      - [Cumulative Importances of Select Groups of Features](#cumulative-importances-of-select-groups-of-features)
 
 ## Bug type dimensions by example
 
@@ -144,9 +160,3 @@ These two bug types occur in several other relatively important features, in add
 
 In particular, for the TTF model, the features which represent the current code state have a much smaller cumulative feature importance than all features involving *[Action, Interaction, Deep]*. 
 So information about the entire history of this bug is more important than information about all the bugs in the current state of the code. One interpretation for the high relative importance of this particular bug for this particular metric is that it tends to require a lot more trial-and-error to fix than other bugs, yet isn't necessarily as deeply confusing as bugs like *[Construct, Interaction, Shallow]*, and thus doesn't contribute as much to a student's desire to abandon the puzzle: since this bug is on an Action node, by testing their code, the students can see which action is wrong, but can't always guess what to do about it without trying out several approaches by testing variations of their code.
-
-<!--
-## TODO
-
-- Discussion/feature importance
--->
