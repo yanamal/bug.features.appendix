@@ -1,5 +1,7 @@
 # Supplemental materials
 
+***
+
 ## Bug type dimensions by example
 
 ### Dimension 1: Type of buggy node
@@ -73,7 +75,37 @@ In this example, an interval for bug type (Construct, Control Flow, Shallow) **o
 
 This example shows a complex temporal pattern which involves just one bug type, (Action, Interaction, Shallow). First a bug of that type is made, then it is resolved but some time later made again; then more bugs of that type are made (the interval type changes from "present" to "multiple"), and subsequently all but one of these bugs are resolved (the interval type changes back to "present").
 
+
+## Feature Importances
+![](all.png)
+
+The figure above shows the impurity-based feature importance of each feature for each of the two models. For both models, the most important single feature is the number of bugs present in the current code (this_bugs), with a feature importance of 0.076 for the Tests To Fix (TTF) model, and 0.048 for the Abandonment Chance (AC) model. 
+
+This can partially be explained by the fact that it is one of the few real-valued features, 
+and the impurity-based feature importance measure tends to be biased toward numerical and high-cardinality features <!--\cite{strobl_bias_2007}-->. However, it also makes sense that having many bugs at once would have a large effect on a student's ability to solve the puzzle quickly, or at all.
+
+The temporal pattern features tend to have more importance than the current and previous state features. 
+The aggregate feature importance of the temporal pattern features is 0.74 for the TTF model, and 0.67 for the AC model. This means that temporal pattern features account for over half of the information gain for both models. By contrast, the aggregate importance of bug types present in the current state is 0.068 for the TTF model, and 0.105 for the AC model. As the table below shows, the average per-feature importance is also higher for temporal pattern features than current or previous state features.
+
+#### Average Feature Importances for Different Bug-derived Categories of Features
+|  | Tests To Fix | Abandonment Chance |
+|--|:-------:|:----:|
+| Temporal Patterns | **0.0080** | **0.0072** |
+| Current State | 0.0034 | 0.0053 |
+| Previous State | 0.0018 | 0.0037 |
+ 
+Many hint generation systems model the student state as a memoryless Markov Decision Process, where the next step 
+depend only on the current state of the code, not how the student got there.
+Yet the importance of temporal features
+in predicting the student's subsequent performance on the current puzzle
+implies that the way a student has arrived at their current partial solution does play a large role in how they will subsequently approach the problem. Although generating a hint is a different problem than predicting whether the student will need the hint, temporal data could sill play a role in effective hint generation: the way that a student got into a particular state may affect whether a particular hint will be effective in getting them out of it.
+
+The importance of temporal features is also notable because it summarizes exactly the kind of information that would be very hard for a teacher with more than one student to keep track of on their own. While it is feasible for a good teacher in a small classroom to maintain a mental estimate of where each student is at the current moment in time, it would be nearly impossible for one teacher to track, in real time, each student's entire problem-solving process while multiple students solve potentially different problems. So, if having information about a student's process so far is indeed important for providing help effectively, a tool which summarizes this information and makes recommendations based on it could be very helpful for improving teacher effectiveness.
+
+<!--
 ## TODO
 
 - Discussion/feature importance
 - examples of important bug types
+  - js examples of scrubbing through the temporal patterns?..
+-->
