@@ -154,7 +154,7 @@ These two bug types occur in several other relatively important features, in add
 |  | Tests To Fix | Abandonment Chance |
 |--|:-------:|:----:|
 | Features involving [Construct, Interaction, Shallow] | 0.065 | 0.087 |
-| Featuress involving [Action, Interaction, Deep] | 0.16 | 0.083 |
+| Features involving [Action, Interaction, Deep] | 0.16 | 0.083 |
 | All "current code state" features | 0.068 | 0.105 |
 | All temporal features | 0.74 | 0.67 |
 
